@@ -1,0 +1,40 @@
+datasource:
+    execute:
+        url: jdbc:mysql://127.0.0.1:3306/schema
+        username: myUser
+        password: pass
+        driver-class-name: com.mysql.jdbc.Driver
+
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .html
+
+server:
+    port: 9999
+
+---
+
+SqlQueryFunction:
+    sql-configs:
+        testJob: 
+            sqlValue: > 
+                SELECT * FROM ebookdba.aaatable 
+                wherfe aaa = ? or bbb = ?
+            titleName: 一個測試
+            comment: 一個測試的註解
+            key-value: >
+                 aaa值:5,bbb值:6
+                 
+        testJob02:
+            sqlValue: > 
+                SELECT * FROM ebookdba.aaatable 
+                where aaa = ?
+            titleName: 一個測試02
+            comment: |
+                一個測試的註解02
+                換行摟
+            key-value: >
+                 aaa值:5
+    

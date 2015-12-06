@@ -2,9 +2,11 @@
 [Bb]in/
 [Oo]bj/
 build/
-
+.gradle/
 
 # elcipse setting
 .setting
 .classpath
+.protect
 .settings/
+
