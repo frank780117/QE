@@ -1,4 +1,4 @@
-var app = angular.module('myApp', [ 'ngRoute' ], function($routeProvider) {
+var app = angular.module('myApp', [ 'ngAnimate', 'ui.bootstrap', 'ngRoute' ], function($routeProvider) {
 	$routeProvider.when('/', {
 		title : '列表',
 		templateUrl : 'partials/list.html',
@@ -41,14 +41,35 @@ app.factory("services", [ '$http', function($http) {
 	return obj;
 } ]);
 
-app.controller('listCtrl', function($scope, services) {
-	services.getsqlConfigs().then(function(data) {
-		console.log(data.data);
-		$scope.sqlConfigs = data.data;
-	});
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+        return [];
+    }
 });
 
-app.controller('executeCtrl', function($scope, services, sqlConfig) {
+app.controller('listCtrl', function($scope, services, filterFilter) {
+	services.getsqlConfigs().then(function(result) {
+		$scope.sqlConfigs = result.data;
+		
+		$scope.$watch('searchText', function(term) {
+	        $scope.filtered = filterFilter($scope.sqlConfigs, term);
+	        $scope.totalItems = $scope.filtered.length;
+	        $scope.currentPage = 1;
+			$scope.maxSize = 10;
+			console.log("length: " + $scope.totalItems);
+	    });
+	});
+	
+	
+	$scope.entryLimit = 10;
+	
+});
+
+app.controller('executeCtrl', function($scope, $uibModal, services, sqlConfig) {
 	var sqlConfig = sqlConfig.data;
 
 	$scope.showSql = false;
@@ -57,6 +78,23 @@ app.controller('executeCtrl', function($scope, services, sqlConfig) {
 	$scope.config.sql = sqlConfig.sqlValue;
 	$scope.config.comment = sqlConfig.comment;
 
+	$scope.animationsEnabled = true;
+
+	  $scope.openSql = function (size) {
+
+	    var modalInstance = $uibModal.open({
+	      animation: $scope.animationsEnabled,
+	      templateUrl: 'sqlModal.html',
+	      controller: 'sqlModalCtrl',
+	      size: size,
+	      resolve: {
+	        sql: function () {
+	          return $scope.config.sql;
+	        }
+	      }
+	    });
+	  }
+	
 	if (sqlConfig.keyValue) {
 		sqlConfig.keyValue.split(',').forEach(function(e) {
 			var param = {};
@@ -95,6 +133,14 @@ app.controller('executeCtrl', function($scope, services, sqlConfig) {
 					});
 				});
 	}
+});
+
+app.controller('sqlModalCtrl', function ($scope, $uibModalInstance, sql) {
+
+	$scope.sql = sql;
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });
 
 app.run([ '$location', '$rootScope', function($location, $rootScope) {

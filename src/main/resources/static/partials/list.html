@@ -1,27 +1,31 @@
 <div class="row">
 	<div class="col-md-12" ng-show="sqlConfigs && sqlConfigs.length > 0">
 
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="navbar-header">
-				<a class="btn btn-lg btn-success" href="#/edit-customer/0"><i
-					class="glyphicon glyphicon-plus"></i>&nbsp;Add new Customer</a>
-			</div>
-		</nav>
+        <div class="col-sm-3 col-md-3 pull-right">
+			<form class="navbar-form" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="searchText" placeholder="Search" aria-describedby="basic-addon1">
+					<span class="input-group-addon" id="basic-addon1">
+						<span class="glyphicon glyphicon-search"></span>
+					</span>
+				</div>
+			</form>
+		</div>
 		<table class="table table-striped table-bordered">
 			<thead>
-				<th>ID&nbsp;</th>
-				<th>標題&nbsp;</th>
-				<th>說明&nbsp;</th>
-				<th>連結&nbsp;</th>
+				<th width="10%">Id&nbsp;</th>
+				<th width="20%">Name&nbsp;</th>
+				<th width="60%">Description&nbsp;</th>
+				<th width="10%">Execute Link&nbsp;</th>
 			</thead>
 			<tbody>
-				<tr ng-repeat="data in sqlConfigs">
+				<tr ng-repeat="data in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 					<td>{{data.id}}</td>
 					<td>{{data.titleName}}</td>
 					<td>{{data.comment}}</td>
-					<td><a href="#/execute/{{data.id}}"
-						class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp;
-							execute
+					<td align="center"><a href="#/execute/{{data.id}}"
+						class="btn">
+						<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
 					</a></td>
 				</tr>
 			</tbody>
@@ -31,5 +35,14 @@
 		<div class="col-md-12">
 			<h4>No sqlConfigs found</h4>
 		</div>
+	</div>
+	<div class="col-md-12" ng-show="!(sqlConfigs && sqlConfigs.length == 0)">
+		<uib-pagination 
+		  total-items="totalItems" 
+		  ng-model="currentPage" 
+		  max-size="maxSize"
+		  items-per-page="10"
+		  />
+		</uib-pagination>
 	</div>
 </div>

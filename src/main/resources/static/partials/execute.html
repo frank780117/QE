@@ -1,12 +1,13 @@
 <form class="form-horizontal">
+
 	<fieldset>
 
 		<!-- Form Name -->
-		<legend>快速執行</legend>
+		<legend>Execute</legend>
 
 		<!-- Text input-->
 		<div class="form-group" ng-repeat="param in config.params">
-			<label class="col-md-4 control-label" for="textinput">{{param.key}}</label>
+			<label class="col-md-2 control-label" for="textinput">{{param.key}}</label>
 			<div class="col-md-4">
 				<input id="textinput" name="textinput" type="text"
 					placeholder="placeholder" class="form-control input-md"
@@ -15,36 +16,25 @@
 		</div>
 
 		<!-- Textarea -->
-		<div class="form-group" ng-show='showSql'>
-			<label class="col-md-4 control-label" for="textarea">SQL</label>
-			<div class="col-md-4">
-				<textarea class="form-control" id="textarea" name="textarea"
-					disabled ng-model='config.sql'></textarea>
-			</div>
-		</div>
-
-		<!-- Textarea -->
 		<div class="form-group">
-			<label class="col-md-4 control-label" for="textarea">comment</label>
-			<div class="col-md-4">
-				<textarea class="form-control" id="textarea" name="textarea"
+			<label class="col-md-2 control-label" for="textarea">comment</label>
+			<div class="col-md-5">
+				<textarea class="form-control" id="textarea" name="textarea" rows="5"
 					disabled ng-model='config.comment'></textarea>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-4 control-label" for="singlebutton">顯示 SQL</label>
-			<div class="col-md-4">
-				<button id="show" name="singlebutton" class="btn btn-primary"
-					ng-click='showSql = !showSql'>顯示 SQL</button>
+			<div class="col-md-12 center-block">
+				<button id="show" name="singlebutton" class="btn btn-primary center-block"
+					ng-click="openSql('lg')">Show SQL</button>
 			</div>
 		</div>
 
 		<!-- Button -->
 		<div class="form-group">
-			<label class="col-md-4 control-label" for="singlebutton">執行</label>
-			<div class="col-md-4">
+			<div class="col-md-12 center-block">
 				<button id="singlebutton" name="singlebutton"
-					class="btn btn-primary" ng-click='executeSql()'>執行</button>
+					class="btn btn-primary center-block" ng-click='executeSql()'>Run</button>
 			</div>
 		</div>
 

@@ -1,8 +1,8 @@
 datasource:
     execute:
-        url: jdbc:mysql://127.0.0.1:3306/schema
-        username: myUser
-        password: pass
+        url: jdbc:mysql://127.0.0.1:3306/TEST_SCHEMA
+        username: test_user
+        password: test_password
         driver-class-name: com.mysql.jdbc.Driver
 
 spring:
@@ -20,21 +20,164 @@ SqlQueryFunction:
     sql-configs:
         testJob: 
             sqlValue: > 
-                SELECT * FROM ebookdba.aaatable 
-                wherfe aaa = ? or bbb = ?
-            titleName: 一個測試
-            comment: 一個測試的註解
+                SELECT * FROM TEST_SCHEMA.qeUser 
+                where NAME = ? or AGE = ?
+            titleName: query user
+            comment: query user by name or age
             key-value: >
-                 aaa值:5,bbb值:6
+                 name:5,age:6
                  
         testJob02:
             sqlValue: > 
-                SELECT * FROM ebookdba.aaatable 
-                where aaa = ?
-            titleName: 一個測試02
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
             comment: |
-                一個測試的註解02
-                換行摟
+                a comment fot test 02
+                new line
             key-value: >
-                 aaa值:5
-    
+                 name:5
+                 
+        testJob03:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob04:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob05:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob06:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob07:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob08:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob09:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob10:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob11:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob12:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob13:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob14:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
+        testJob15:
+            sqlValue: > 
+                SELECT * FROM TEST_SCHEMA.TEST_TABLE 
+                wherfe NAME = ?
+            titleName: test name 02
+            comment: |
+                a comment fot test 02
+                new line
+            key-value: >
+                 name:5
+                 
