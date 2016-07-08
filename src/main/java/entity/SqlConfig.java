@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "FRANK_USAGE")
+@Entity(name = "QE_SQL_CONFIG")
 public class SqlConfig{
 
     @Id
