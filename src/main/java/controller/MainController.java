@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.clike.qe.vo.CurrentPage;
+
 import repository.FileSqlConfig;
 import repository.SqlConfigRepository;
 import service.SqlExecutor;
@@ -47,5 +49,16 @@ public class MainController{
             params = new LinkedList<String>();
         }
         return sqlExecutor.executeSql(sql, params.toArray());
+    }
+    
+    @RequestMapping(value = "/executeSqlPageable", method = RequestMethod.GET)
+    @ResponseBody
+    public CurrentPage<Map<String, Object>> executeSql(@RequestParam("sql") String sql, 
+                                                @RequestParam(value = "params", required = false) List<String> params,
+                                                @RequestParam(value = "pageNo", defaultValue="1") int pageNo) {
+        if(params == null) {
+            params = new LinkedList<String>();
+        }
+        return sqlExecutor.executeSql(sql, params.toArray(), pageNo, 10);
     }
 }

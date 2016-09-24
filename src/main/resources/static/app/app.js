@@ -27,13 +27,14 @@ app.factory("services", [ '$http', function($http) {
 		return $http.get('/sqlConfig/' + id);
 	}
 
-	obj.executeSql = function(sql, params) {
+	obj.executeSql = function(sql, params, pageNo) {
 		return $http({
-			url : '/executeSql',
+			url : '/executeSqlPageable',
 			method : "GET",
 			params : {
 				sql : sql,
-				params : params
+				params : params,
+				pageNo : pageNo || 1
 			}
 		});
 	}
@@ -103,22 +104,27 @@ app.controller('executeCtrl', function($scope, $uibModal, services, sqlConfig) {
 			$scope.config.params.push(param);
 		});
 	}
-
-	$scope.executeSql = function() {
+	$scope.pageChanged = function() {
+		$scope.executeSql($scope.currentPage);
+	}
+	
+	$scope.executeSql = function(pageNo) {
 		var paramvalues = new Array();
 		$scope.config.params.forEach(function(e) {
 			paramvalues.push(e.value);
 		});
 		mask.open("Loading on server.");
-		services.executeSql($scope.config.sql, paramvalues).then(
+		services.executeSql($scope.config.sql, paramvalues, pageNo).then(
 				function(response) {
 					mask.close();
 					var result = response.data;
 					$scope.sqlResult = {};
 					if (result && Object.keys(result).length !== 0) {
 						$scope.sqlResult = {};
-						$scope.sqlResult.header = Object.keys(result[0]);
-						$scope.sqlResult.body = result;
+						$scope.sqlResult.header = Object.keys(result.pageItems[0]);
+						$scope.sqlResult.body = result.pageItems;
+						$scope.pagesAvailable = result.pagesAvailable;
+						$scope.currentPage=pageNo;
 					} else {
 						$scope.sqlResult = null;
 					}

@@ -55,6 +55,15 @@
 			</tr>
 		</tbody>
 	</table>
+	<uib-pagination 
+	  total-items="pagesAvailable*10" 
+	  ng-model="currentPage" 
+	  max-size="5"
+	  items-per-page="10"
+	  boundary-link-numbers="true"
+	  ng-change="pageChanged()"
+	  />
+	</uib-pagination>
 </div>
 
 <div class="panel panel-default" ng-hide="sqlResult && sqlResult.body.length > 0">
